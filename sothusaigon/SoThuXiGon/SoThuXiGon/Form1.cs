@@ -40,25 +40,15 @@ namespace SoThuXiGon
             else
                 e.Effect = DragDropEffects.Move;
         }
-        bool isItemChanged = false;
+        bool isItemChange = false;
+
         private void lstDanhSach_DragDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.Text))
-                if (!lstDanhSach.Items.Contains(lstThuMoi.SelectedItem))
-                {
-                    int newIndex = lstDanhSach.IndexFromPoint(lstDanhSach.PointToClient(new Point(e.X, e.Y)));
-                    object selectedItem = e.Data.GetData(DataFormats.Text);
-
-
-                    lstDanhSach.Items.Remove(selectedItem);
-                    if (newIndex != -1)
-                        lstDanhSach.Items.Insert(newIndex, selectedItem);
-                    else
-                        lstDanhSach.Items.Insert(lstDanhSach.Items.Count, selectedItem);
-
-
-                    isItemChanged = true;
-                }
+            {
+                ListBox lb = (ListBox)sender;
+                lb.Items.Add(e.Data.GetData(DataFormats.Text));
+            }
         }
 
 
@@ -89,76 +79,78 @@ namespace SoThuXiGon
             StreamReader reader = new StreamReader("thumoi.txt");
             if (reader == null) return;
             string input;
-            while( (input = reader.ReadLine()) != null
-                )
+            while ((input = reader.ReadLine()) != null)
+            {
                 lstThuMoi.Items.Add(input);
 
             }
             reader.Close();
-            using (StreamReader rs = new StreamReader("danhsachthu.txt")
+            using (StreamReader rs = new StreamReader("danhsachthu.txt"))
             {
                 input = null;
-                while((input = rs.ReadLine()) != null)
-                    {
+                while ((input = rs.ReadLine()) != null)
+                {
                     lstDanhSach.Items.Add(input);
                 }
             }
         }
-    
-
- 
-
-        
 
 
-            private void timer1_Tick(object sender, EventArgs e)
-            {
-                lblTime.Text = string.Format("Bây giờ là {0}:{1}:{2} ngày {3} tháng {4} năm {5}",
-                                             DateTime.Now.Hour,
-                                             DateTime.Now.Minute,
-                                             DateTime.Now.Second,
-                                             DateTime.Now.Day,
-                                             DateTime.Now.Month,
-                                             DateTime.Now.Year);
-            }
+
+
+
+
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblTime.Text = string.Format("Bây giờ là {0}:{1}:{2} ngày {3} tháng {4} năm {5}",
+                                         DateTime.Now.Hour,
+                                         DateTime.Now.Minute,
+                                         DateTime.Now.Second,
+                                         DateTime.Now.Day,
+                                         DateTime.Now.Month,
+                                         DateTime.Now.Year);
+        }
 
         private void mnuDelete_Click(object sender, EventArgs e)
         {
-                while (lstDanhSach.SelectedIndex != -1)
-                    lstDanhSach.Items.RemoveAt(lstDanhSach.SelectedIndex);
+            while (lstDanhSach.SelectedIndex != -1)
+                lstDanhSach.Items.RemoveAt(lstDanhSach.SelectedIndex);
 
 
-                isItemChanged = true;
-            }
-    }
-
-        
+            isItemChange = true;
         }
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+
+        private void Form_FormClosing( object sender, FormClosingEventArgs e)
+
         {
-            if ( isItemChanged == true)
-                if (isSave)
+            if (isItemChange == false)
+                if( isSave)
+
+            {
+                DialogResult result = MessageBox.Show("Bạn có muốn lưu danh sách?", "",
+                                                      MessageBoxButtons.YesNoCancel,
+                                                      MessageBoxIcon.None);
+                if (result == DialogResult.Yes)
                 {
-                    DialogResult result = MessageBox.Show("Bạn có muốn lưu danh sách?", "",
-                                                          MessageBoxButtons.YesNoCancel,
-                                                          MessageBoxIcon.None);
-                    if (result == DialogResult.Yes)
-                    {
-                        Save(sender, e);
-                        e.Cancel = false;
-                    }
-                    else if (result == DialogResult.No)
-                        e.Cancel = false;
-                    else
-                        e.Cancel = true;
+                    Save(sender, e);
+                    e.Cancel = false;
                 }
-
-
-
+                else if (result == DialogResult.No)
+                    e.Cancel = false;
+                else
+                    e.Cancel = true;
+            }
         }
+    }
+}
+
+
+
+       
 
         
-    }
+    
 
 
     

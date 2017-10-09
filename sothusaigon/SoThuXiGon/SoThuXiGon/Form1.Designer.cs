@@ -150,7 +150,7 @@
             this.sửaĐổiToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(15, 9);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(208, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(116, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -208,29 +208,28 @@
             // 
             this.mnuCopy.Name = "mnuCopy";
             this.mnuCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.mnuCopy.Size = new System.Drawing.Size(152, 22);
+            this.mnuCopy.Size = new System.Drawing.Size(136, 22);
             this.mnuCopy.Text = "Sao";
             // 
             // mnuCut
             // 
             this.mnuCut.Name = "mnuCut";
             this.mnuCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuCut.Size = new System.Drawing.Size(152, 22);
+            this.mnuCut.Size = new System.Drawing.Size(136, 22);
             this.mnuCut.Text = "Cắt";
             // 
             // mnuPaste
             // 
             this.mnuPaste.Name = "mnuPaste";
             this.mnuPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.mnuPaste.Size = new System.Drawing.Size(152, 22);
+            this.mnuPaste.Size = new System.Drawing.Size(136, 22);
             this.mnuPaste.Text = "Dán";
             // 
             // mnuDelete
             // 
             this.mnuDelete.Name = "mnuDelete";
-            this.mnuDelete.Size = new System.Drawing.Size(152, 22);
+            this.mnuDelete.Size = new System.Drawing.Size(136, 22);
             this.mnuDelete.Text = "Xóa";
-            this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click);
             // 
             // timer1
             // 
@@ -249,6 +248,7 @@
             this.MinimumSize = new System.Drawing.Size(447, 405);
             this.Name = "Form1";
             this.Text = "So Thu Xi Gon";
+        
             this.Click += new System.EventHandler(this.Save);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
